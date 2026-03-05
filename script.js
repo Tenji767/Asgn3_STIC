@@ -1,4 +1,4 @@
-const submit = document.getElementById('submitLocation');
+const submit = document.getElementById('searchWeather');
 const inputcity = document.getElementById('locationinput');
 const locationapikey = '01212a7cb6a8db7638a95a05edfb6a86';
 
