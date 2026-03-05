@@ -3,7 +3,8 @@ const inputcity = document.getElementById('locationinput');
 const locationapikey = '01212a7cb6a8db7638a95a05edfb6a86';
 
 submit.addEventListener('click', async () => {
-  let city = inputcity.value;
+//   let city = inputcity.value;
+let city= "lynchburg";
 
   let responseLocation = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${locationapikey}`);
 
@@ -43,15 +44,66 @@ const formattedTime = date.toLocaleTimeString("en-US", optionsTime);
     let precipAmt = data2.hourly.precipitation[index]; //in mm
     let weatherCode = data2.hourly.weather_code[index]; //check to see what each code corresponds to, make it the background
     let tempunit = data2.hourly_units.temperature_2m;
+    let currentTemperature = data2.current.temperature_2m;
 
-    document.getElementById('currentTemp').innerText = `${data2.current_temperature_2m} ${tempunit}`;
+    document.getElementById('currentTemp').innerText = `${currentTemperature} ${tempunit}`;
+
+const weatherIcons = {
+  0: "☀️",
+
+  1: "⛅",
+  2: "⛅",
+  3: "☁️",
+
+  45: "🌫️",
+  48: "🌫️",
+
+  51: "🌦️",
+  53: "🌦️",
+  55: "🌧️",
+
+  56: "🥶🌧️",
+  57: "🥶🌧️",
+
+  61: "🌧️",
+  63: "🌧️",
+  65: "🌧️",
+
+  66: "🌧️❄️",
+  67: "🌧️❄️",
+
+  71: "❄️",
+  73: "❄️",
+  75: "❄️",
+
+  77: "🌨️",
+
+  80: "🌦️",
+  81: "🌧️",
+  82: "⛈️",
+
+  85: "🌨️",
+  86: "❄️🌨️",
+
+  95: "⛈️",
+
+  96: "⛈️🧊",
+  99: "⛈️🧊"
+};
+
+function getWeatherIcon(code) {
+  return weatherIcons[code] || "❓";
+}
+
+
 
     //create weathercard for each hour
     const weatherCard = document.createElement('div');
 
     weatherCard.innerHTML = `
-        <h3>${formattedDate} ${formattedTime}</h3>
-          <h2>${temp}${tempunit}</h2>
+        <h3>${formattedTime}</h3>
+        <p>${getWeatherIcon(weatherCode)}</p>
+          <h3>${temp}${tempunit}</h3>
           <h4>${precipProb}%</h4>
         `;
 
