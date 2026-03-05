@@ -47,7 +47,7 @@ const formattedTime = date.toLocaleTimeString("en-US", optionsTime);
     const weatherCard = document.createElement('div');
 
     weatherCard.innerHTML = `
-        <h3>${time}</h3>
+        <h3>${formattedDate} ${formattedTime}</h3>
           <h2>${temp}${tempunit}</h2>
           <h4>${precipProb}%</h4>
         `;
