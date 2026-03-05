@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #eef3f8;
+}
+
+/* HEADER */
+
+header {
+  background: #2c6ed5;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* SEARCH */
+
+.search-section {
+  text-align: center;
+  padding: 20px;
+  background: white;
+}
+
+input {
+  padding: 10px;
+  width: 200px;
+}
+
+button {
+  padding: 10px 15px;
+  background: #2c6ed5;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1f4fa3;
+}
+
+/* MAIN LAYOUT */
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* SECTIONS */
+
+section {
+  background: white;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* WEATHER GRID */
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.weather-grid div {
+  background: #f2f6fc;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* DAILY */
+
+#dailyWeather {
+  display: flex;
+  gap: 10px;
+}
+
+/* ALERTS */
+
+.alert-section {
+  border-left: 6px solid red;
+}
+
+/* RADAR */
+
+.radar-placeholder {
+  height: 300px;
+  background: #dbe6f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #2c6ed5;
+  color: white;
+}
