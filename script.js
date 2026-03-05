@@ -24,15 +24,16 @@ submit.addEventListener('click', async () => {
   let data2 = await responseWeather.json();
 
   data2.hourly.time.forEach((time, index) => {
-    const temp = data2.hourly.temperature_2m[index];
-    const humidity = data2.hourly.relative_humidity_2m[index];
-    const precipProb = data2.hourly.precipitation_probability[index];
-    const precipAmt = data2.hourly.precipitation[index]; //in mm
-    const weatherCode = data2.hourly.weather_code[index]; //check to see what each code corresponds to, make it the background
+    let temp = data2.hourly.temperature_2m[index];
+    let humidity = data2.hourly.relative_humidity_2m[index];
+    let precipProb = data2.hourly.precipitation_probability[index];
+    let precipAmt = data2.hourly.precipitation[index]; //in mm
+    let weatherCode = data2.hourly.weather_code[index]; //check to see what each code corresponds to, make it the background
 
     const weatherCard = document.createElement('div');
 
-    weatherCard.innerHTML = ` <h3>${time}</h3>
+    weatherCard.innerHTML = `
+        <h3>${time}</h3>
           <h2>${temp}</h2>
           <h4>${precipProb}%</h4>
         `;
