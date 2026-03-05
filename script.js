@@ -18,7 +18,7 @@ submit.addEventListener('click', async () => {
   let lon = data[0].lon;
 
   let responseWeather = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,visibility,weather_code&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=auto`
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_min,temperature_2m_max&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,visibility,weather_code&current=temperature_2m&timezone=auto&temperature_unit=fahrenheit`
   );
 
   let data2 = await responseWeather.json();
@@ -44,6 +44,9 @@ const formattedTime = date.toLocaleTimeString("en-US", optionsTime);
     let weatherCode = data2.hourly.weather_code[index]; //check to see what each code corresponds to, make it the background
     let tempunit = data2.hourly_units.temperature_2m;
 
+    document.getElementById('currentTemp').innerText = `${data2.current_temperature_2m} ${tempunit}`;
+
+    //create weathercard for each hour
     const weatherCard = document.createElement('div');
 
     weatherCard.innerHTML = `
