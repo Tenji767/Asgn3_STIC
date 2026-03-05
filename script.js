@@ -101,6 +101,7 @@ function getWeatherIcon(code) {
     const weatherCard = document.createElement('div');
 
     weatherCard.innerHTML = `
+        <h6>${formattedDate}</h6>
         <h3>${formattedTime}</h3>
         <p>${getWeatherIcon(weatherCode)}</p>
           <h3>${temp}${tempunit}</h3>
