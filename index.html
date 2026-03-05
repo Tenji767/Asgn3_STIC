@@ -17,21 +17,25 @@
       <input id="locationinput" type="text" placeholder="Enter city name here" />
       <button id="searchWeather">Search</button>
     </section>
+    
+  
 
     <main>
+    <!-- daily weather -->
+      <section class="daily-section">
+        <h2>Daily Forecast</h2>
+        <div id="dailyWeather">
+          <h1 id="currentTemp"></h1>
+
+            <div id="minmax"></div>
+        </div>
+      </section>
       <!-- hourly weather -->
       <section class="weather-section">
         <h2>Hourly Weather</h2>
         <div id="weathercard" class="weather-grid"></div>
       </section>
 
-      <!-- daily weather -->
-      <section class="daily-section">
-        <h2>Daily Forecast</h2>
-        <div id="dailyWeather">
-          <p>Daily forecast will appear here.</p>
-        </div>
-      </section>
 
       <!-- weather alerts -->
       <section class="alert-section">
