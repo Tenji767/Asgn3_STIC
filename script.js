@@ -5,6 +5,9 @@ const locationapikey = '01212a7cb6a8db7638a95a05edfb6a86';
 submit.addEventListener('click', async () => {
 //   let city = inputcity.value;
 let city= "lynchburg";
+  const container = document.getElementById('weathercard');
+  container.innerHTML = '';
+
 
   let responseLocation = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${locationapikey}`);
 
@@ -25,18 +28,14 @@ let city= "lynchburg";
   let data2 = await responseWeather.json();
 
   data2.hourly.time.forEach((time, index) => {
-
     const datetime = time;
-const date = new Date(datetime);
+    const date = new Date(datetime);
 
-const optionsDate = { month: "long", day: "numeric" };
-const optionsTime = { hour: "numeric", minute: "2-digit" };
+    const optionsDate = { month: 'long', day: 'numeric' };
+    const optionsTime = { hour: 'numeric', minute: '2-digit' };
 
-const formattedDate = date.toLocaleDateString("en-US", optionsDate);
-const formattedTime = date.toLocaleTimeString("en-US", optionsTime);
-
-
-
+    const formattedDate = date.toLocaleDateString('en-US', optionsDate);
+    const formattedTime = date.toLocaleTimeString('en-US', optionsTime);
 
     let temp = data2.hourly.temperature_2m[index];
     let humidity = data2.hourly.relative_humidity_2m[index];
