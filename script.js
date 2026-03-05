@@ -4,7 +4,9 @@ const locationapikey = '01212a7cb6a8db7638a95a05edfb6a86';
 
 submit.addEventListener('click', async () => {
   const container = document.getElementById('weathercard');
+  const alertsContainer = document.getElementById('weatherAlerts');
   container.innerHTML = '';
+  alertsContainer.innerHTML = '';
 
   let city = inputcity.value;
 
@@ -52,5 +54,30 @@ submit.addEventListener('click', async () => {
         `;
 
     document.getElementById('weathercard').appendChild(weatherCard);
+  });
+
+  let pointresponse = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
+  let pointdata = await pointresponse.json();
+
+  let state = pointdata.properties.relativeLocation.properties.state;
+
+  let alertresponse = await fetch(`https://api.weather.gov/alerts/active?area=${state}`);
+  let alertdata = await alertresponse.json();
+
+  if (alertdata.features.length === 0) {
+    alertsContainer.innerHTML = '<p>No active weather alerts for this area.</p>';
+    return;
+  }
+
+  alertdata.features.forEach(alert => {
+    const event = alert.properties.event;
+    const description = alert.properties.description;
+    const alertCard = document.createElement('div');
+
+    alertCard.innerHTML = `
+      <h3>${event}</h3>
+      <p>${description}</p>
+    `;
+    alertsContainer.appendChild(alertCard);
   });
 });
