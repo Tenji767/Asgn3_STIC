@@ -14,3 +14,7 @@ https://api.open-meteo.com/v1/forecast?latitude=60&longitude=10&hourly=temperatu
 ### Weather Alert API
 
 https://api.weather.gov/alerts/active?area={state}
+
+### Radar API
+
+https://maps.openweathermap.org/maps/2.0/weather/1h/{op}/{z}/{x}/{y}?appid={01212a7cb6a8db7638a95a05edfb6a86}

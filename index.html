@@ -5,6 +5,11 @@
     <!--Make it mobile sized-->
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   </head>
 
   <body>
@@ -14,7 +19,11 @@
 
     <!-- search -->
     <section class="search-section">
-      <input id="locationinput" type="text" placeholder="Enter city name here" />
+      <input
+        id="locationinput"
+        type="text"
+        placeholder="Enter city name here"
+      />
       <button id="searchWeather">Search</button>
     </section>
 
@@ -26,6 +35,7 @@
       </section>
 
       <!-- daily weather -->
+      <!-- add humidity and visibility -->
       <section class="daily-section">
         <h2>Daily Forecast</h2>
         <div id="dailyWeather">
@@ -42,9 +52,10 @@
       </section>
 
       <!-- radar map -->
+
       <section class="radar-section">
         <h2>Weather Radar</h2>
-        <div class="radar-placeholder">Radar map will appear here.</div>
+        <div id="map"></div>
       </section>
     </main>
   </body>
