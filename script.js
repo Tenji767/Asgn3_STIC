@@ -87,6 +87,18 @@ submit.addEventListener("click", async () => {
 
   let data2 = await responseWeather.json();
 
+//Humidity and visibility 
+    const nowISO = data2.current.time;
+    const nowIndex = data2.hourly.time.indexOf(nowISO);
+    const i = nowIndex !== -1 ? nowIndex : 0;
+
+    const humidityNow = data2.hourly.relative_humidity_2m[i];
+    const visibilityNowMeters = data2.hourly.visibility[i];
+
+    document.getElementById("humidityValue").innerText = `${humidityNow}%`;
+    document.getElementById("visibilityValue").innerText =
+      `${(visibilityNowMeters / 1000).toFixed(1)} km`;
+
   data2.hourly.time.forEach((time, index) => {
     const datetime = time;
     const date = new Date(datetime);
@@ -104,6 +116,8 @@ submit.addEventListener("click", async () => {
     let weatherCode = data2.hourly.weather_code[index]; //check to see what each code corresponds to, make it the background
     let tempunit = data2.hourly_units.temperature_2m;
     let currentTemperature = data2.current.temperature_2m;
+    // Get the visibility value for the specific hour currently being processed inside the hourly weather loop.
+    let visibility = data2.hourly.visibility[index];
 
     document.getElementById("currentTemp").innerText =
       `${currentTemperature} ${tempunit}`;
