@@ -59,7 +59,9 @@ section {
 
 .weather-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-auto-flow: column;        /* places items in columns instead of rows */
+  grid-auto-columns: 120px;      /* width of each item */
+  overflow-x: auto;              /* enables horizontal scrolling */
   gap: 10px;
 }
 
@@ -68,12 +70,21 @@ section {
   padding: 10px;
   border-radius: 6px;
   text-align: center;
+  width: 100px;
+  height: 230px;
+}
+
+.weather-grid div h1, h2, h3, h4 {
+  padding: 2px;
 }
 
 /* DAILY */
 
 #dailyWeather {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   gap: 10px;
 }
 
