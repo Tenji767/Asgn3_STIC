@@ -46,8 +46,7 @@ function animateRadar() {
 }
 
 submit.addEventListener("click", async () => {
-  //   let city = inputcity.value;
-  let city = "lynchburg";
+  let city = inputcity.value;
   const container = document.getElementById("weathercard");
   const alertsContainer = document.getElementById("weatherAlerts");
   container.innerHTML = "";
