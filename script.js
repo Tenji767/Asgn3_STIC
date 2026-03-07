@@ -82,7 +82,7 @@ submit.addEventListener("click", async () => {
   loadRadarAnimation(lat, lon);
 
   let responseWeather = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_min,temperature_2m_max&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,visibility,weather_code&current=temperature_2m&timezone=auto&temperature_unit=fahrenheit`,
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_min,temperature_2m_max,precipitation_probability_max,weather_code&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,visibility,weather_code&current=temperature_2m&timezone=auto&temperature_unit=fahrenheit`,
   );
 
   let data2 = await responseWeather.json();
@@ -98,7 +98,7 @@ submit.addEventListener("click", async () => {
     document.getElementById("humidityValue").innerText = `${humidityNow}%`;
     document.getElementById("visibilityValue").innerText =
       `${(visibilityNowMeters / 1000).toFixed(1)} km`;
-
+//date and time
   data2.hourly.time.forEach((time, index) => {
     const datetime = time;
     const date = new Date(datetime);
@@ -109,16 +109,15 @@ submit.addEventListener("click", async () => {
     const formattedDate = date.toLocaleDateString("en-US", optionsDate);
     const formattedTime = date.toLocaleTimeString("en-US", optionsTime);
 
+//set weather variables
     let temp = data2.hourly.temperature_2m[index];
-    let humidity = data2.hourly.relative_humidity_2m[index];
     let precipProb = data2.hourly.precipitation_probability[index];
-    let precipAmt = data2.hourly.precipitation[index]; //in mm
     let weatherCode = data2.hourly.weather_code[index]; //check to see what each code corresponds to, make it the background
     let tempunit = data2.hourly_units.temperature_2m;
     let currentTemperature = data2.current.temperature_2m;
     // Get the visibility value for the specific hour currently being processed inside the hourly weather loop.
     let visibility = data2.hourly.visibility[index];
-
+//setting current weather
     document.getElementById("currentTemp").innerText =
       `${currentTemperature} ${tempunit}`;
 
@@ -182,6 +181,80 @@ submit.addEventListener("click", async () => {
 
     document.getElementById("weathercard").appendChild(weatherCard);
   });
+  
+    data2.daily.time.forEach((time, index) => {
+
+        const dateString = time;
+    const date = new Date(dateString);
+
+const formatted = date.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric"
+});
+    const weatherIcons = {
+      0: "☀️",
+
+      1: "⛅",
+      2: "⛅",
+      3: "☁️",
+
+      45: "🌫️",
+      48: "🌫️",
+
+      51: "🌦️",
+      53: "🌦️",
+      55: "🌧️",
+
+      56: "🥶🌧️",
+      57: "🥶🌧️",
+
+      61: "🌧️",
+      63: "🌧️",
+      65: "🌧️",
+
+      66: "🌧️❄️",
+      67: "🌧️❄️",
+
+      71: "❄️",
+      73: "❄️",
+      75: "❄️",
+
+      77: "🌨️",
+
+      80: "🌦️",
+      81: "🌧️",
+      82: "⛈️",
+
+      85: "🌨️",
+      86: "❄️🌨️",
+
+      95: "⛈️",
+
+      96: "⛈️🧊",
+      99: "⛈️🧊",
+    };
+
+    function getWeatherIcon(code) {
+      return weatherIcons[code] || "❓";
+    }
+
+  //weekly weather
+    const weeklyweathercard = document.createElement("div");
+
+    let minTemp = data2.daily.temperature_2m_min[index];
+    let maxTemp = data2.daily.temperature_2m_max[index];
+    let precipProbMax = data2.daily.precipitation_probability_max[index];
+    let weatherCodeDaily = data2.daily.weather_code[index];
+    let tempunit = data2.daily_units.temperature_2m_max;
+
+    weeklyweathercard.innerHTML= `
+        <h6>${formatted}</h6>
+        <p>${getWeatherIcon(weatherCodeDaily)}</p>
+          <h3>${minTemp}${tempunit} - ${maxTemp}${tempunit}</h3>
+          <h4>${precipProbMax}%</h4>
+        `
+    document.getElementById("weeklyweathercard").appendChild(weeklyweathercard);
+    });
 
   let pointresponse = await fetch(
     `https://api.weather.gov/points/${lat},${lon}`,

@@ -30,35 +30,33 @@
     <main>
       <!-- daily weather -->
       <section class="daily-section">
-        <h2>Daily Forecast</h2>
+        <h2>Current Weather</h2>
         <div id="dailyWeather">
           <h1 id="currentTemp"></h1>
 
           <div id="minmax"></div>
+          <div id="weatherDetails">
+          <p>Humidity: <span id="humidityValue">--</span></p>
+          <p>Visibility: <span id="visibilityValue">--</span></p>
+        </div>
         </div>
       </section>
+
+
       <!-- hourly weather -->
       <section class="weather-section">
         <h2>Hourly Weather</h2>
         <div id="weathercard" class="weather-grid"></div>
       </section>
 
-      <!-- daily weather -->
-      <!-- add humidity and visibility -->
-      <section class="daily-section">
-        <h2>Details</h2>
-        <div id="weatherDetails">
-          <p>Humidity: <span id="humidityValue">--</span></p>
-          <p>Visibility: <span id="visibilityValue">--</span></p>
-        </div>
-      </section>
 
-      <section class="daily-section">
-        <h2>Daily Forecast</h2>
-        <div id="dailyWeather">
-          <p>Daily forecast will appear here.</p>
-        </div>
-      </section>
+<!-- Actual daily weather -->
+ <section class="weekly-section">
+  <h2>Weekly Weather</h2>
+  
+    <div id="weeklyweathercard" class="weather-grid"></div>
+  
+ </section>
 
       <!-- weather alerts -->
       <section class="alert-section">
